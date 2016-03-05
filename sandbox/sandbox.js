@@ -1,19 +1,18 @@
 var imageBrightness = require('../index');
 
+function applyResults(selector, src) {
+    var target;
+    var image;
+
+    target = document.querySelectorAll(selector)[0];
+
+    image = document.createElement('img');
+    image.setAttribute('src', src);
+    target.appendChild(image);
+}
+
 window.onload = function () {
 
-    //Usage 1:
-    imageBrightness({
-        from: '#original',
-        to: '#target-1',
-        adjustment: 30
-    });
-
-    imageBrightness({
-        from: '#original',
-        to: '#target-2',
-        adjustment: 70
-    });
 
     //Usage 2:
     var canvas = document.createElement('canvas');
@@ -22,34 +21,19 @@ window.onload = function () {
     img.onload = function(){
         context.drawImage(img,0,0);
 
-        var imageData = context.getImageData(0, 0, img.width, img.height);
+        var data = context.getImageData(0, 0, img.width, img.height);
 
-        var result3 = imageBrightness({
-            imageData: imageData,
-            to: '#target-3',
+        var results1 = imageBrightness({
+            data: data,
             adjustment: 30
         });
-        console.log('result3: ', result3);
+        applyResults('#target-1', results1);
 
-        var result4 = imageBrightness({
-            imageData: imageData,
-            to: '#target-4',
+        var results2 = imageBrightness({
+            data: data,
             adjustment: 70
         });
-        console.log(result4);
+        applyResults('#target-2', results2);
     };
     img.src = "http://lorempixel.com/400/200";
-
-    //Usage 3:
-    imageBrightness({
-        url: "http://lorempixel.com/400/200",
-        to: '#target-5',
-        adjustment: 30
-    });
-
-    imageBrightness({
-        url: "http://lorempixel.com/400/200",
-        to: '#target-6',
-        adjustment: 70
-    });
 }

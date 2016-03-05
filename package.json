@@ -1,6 +1,6 @@
 {
   "name": "image-brightness",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Small library to apply a brightness transformation to a image",
   "main": "index.js",
   "scripts": {
