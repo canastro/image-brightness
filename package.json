@@ -1,0 +1,28 @@
+{
+  "name": "image-brightness",
+  "version": "0.0.1",
+  "description": "Small library to apply a brightness transformation to a image",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify sandbox/sandbox.js > sandbox/bundle.js"
+  },
+  "author": "Ricardo Canastro",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canastro/image-brightness"
+  },
+  "bugs": {
+    "url": "https://github.com/canastro/image-brightness/issues"
+  },
+  "keywords": [
+    "image",
+    "image-brightness",
+    "brightness",
+    "transformation",
+    "pixel"
+  ],
+  "devDependencies": {
+    "browserify": "^13.0.0"
+  }
+}
