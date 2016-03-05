@@ -21,11 +21,11 @@ function getImageData(context, element) {
 function transform(canvas, context, imageData, adjustment) {
     var data = imageData.data;
 
-    data.forEach(function (item, i) {
+    for (var i = 0; i < data.length; i += 4) {
         data[i] += adjustment;
         data[i+1] += adjustment;
         data[i+2] += adjustment;
-    });
+    }
 
     context.putImageData(imageData, 0, 0);
     return canvas.toDataURL();
