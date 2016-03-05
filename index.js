@@ -1,3 +1,9 @@
+function copyImageData(ctx, src) {
+    var dst = ctx.createImageData(src.width, src.height);
+    dst.data.set(src.data);
+    return dst;
+}
+
 function transform(canvas, context, imageData, adjustment) {
     var data = imageData.data;
 
@@ -24,9 +30,11 @@ module.exports = function imageBrightness(options) {
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
 
-    if (!options.data) {
-        throw new Error('image-brightness:: no "data" provided');
+    if (!options.data || !options.adjustment) {
+        throw new Error('image-brightness:: invalid options provided');
     }
+
+    options.data = copyImageData(context, options.data);
 
     result = transform(canvas, context, options.data, options.adjustment);
 

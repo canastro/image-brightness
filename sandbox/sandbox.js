@@ -13,8 +13,6 @@ function applyResults(selector, src) {
 
 window.onload = function () {
 
-
-    //Usage 2:
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
     var img = new Image;
