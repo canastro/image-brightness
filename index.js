@@ -26,12 +26,10 @@ function getPixels(canvas, context, imageData) {
 
 /**
  * @name transform
- * @param {object} canvas
- * @param {object} context
  * @param {object} imageData
  * Iterate over the array applying the brightness transformation
  */
-function transform(canvas, context, imageData, adjustment) {
+function transform(imageData, adjustment) {
     var data = imageData.data;
 
     for (var i = 0; i < data.length; i += 4) {
@@ -40,6 +38,15 @@ function transform(canvas, context, imageData, adjustment) {
         data[i+2] += adjustment;
     }
 
+    return imageData;
+}
+
+/**
+ * @name convertToDataURL
+ * @param {object} canvas
+ * @param {object} context
+ */
+function convertToDataURL(canvas, context, imageData) {
     context.putImageData(imageData, 0, 0);
     return canvas.toDataURL();
 }
@@ -49,6 +56,7 @@ function transform(canvas, context, imageData, adjustment) {
  * @param {object} options
  * @param {string} options.data
  * @param {string} options.adjustment - adjustment value to apply
+ * @param {bool} options.asDataURL
  */
 module.exports = function imageBrightness(options) {
     var element;
@@ -66,7 +74,11 @@ module.exports = function imageBrightness(options) {
 
     options.data = getPixels(canvas, context, options.data);
 
-    result = transform(canvas, context, options.data, options.adjustment);
+    result = transform(options.data, options.adjustment);
+
+    if (options.asDataURL) {
+        return convertToDataURL(canvas, context, result);
+    }
 
     return result;
 }

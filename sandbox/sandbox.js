@@ -27,15 +27,17 @@ window.onload = function () {
 
         var results1 = imageBrightness({
             data: data,
-            adjustment: 30
+            adjustment: 30,
+            asDataURL: true
         });
         applyResults('#target-1', results1);
 
         var results2 = imageBrightness({
             data: data,
-            adjustment: 70
+            adjustment: 70,
+            asDataURL: true
         });
         applyResults('#target-2', results2);
     };
-    img.src = "http://lorempixel.com/400/200";
+    img.src = "dummy.jpg";
 }
