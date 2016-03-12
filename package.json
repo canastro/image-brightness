@@ -1,8 +1,8 @@
 {
   "name": "image-brightness",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Small library to apply a brightness transformation to a image",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
      "build": "browserify sandbox/sandbox.js > sandbox/bundle.js",
      "test": "./node_modules/.bin/karma start",
