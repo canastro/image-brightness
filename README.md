@@ -1,3 +1,6 @@
+![build status](https://travis-ci.org/canastro/image-brightness.svg?branch=master)
+[![npm version](https://badge.fury.io/js/image-brightness.svg)](https://badge.fury.io/js/image-brightness)
+
 # image-brightness
 
 Small library to apply a brightness transformation to a image.

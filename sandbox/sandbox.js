@@ -1,4 +1,4 @@
-var imageBrightness = require('../index');
+var imageBrightness = require('../src/index');
 
 function applyResults(selector, src) {
     var target;
