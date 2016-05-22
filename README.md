@@ -1,14 +1,14 @@
-![build status](https://travis-ci.org/canastro/image-brightness.svg?branch=master)
-[![npm version](https://badge.fury.io/js/image-brightness.svg)](https://badge.fury.io/js/image-brightness)
+![build status](https://travis-ci.org/canastro/image-filter-brightness.svg?branch=master)
+[![npm version](https://badge.fury.io/js/image-filter-brightness.svg)](https://badge.fury.io/js/image-filter-brightness)
 
-# image-brightness
+# image-filter-brightness
 
 Small library to apply a brightness transformation to a image.
 
 # Install
 
 ```
-npm install image-brightness --save
+npm install image-filter-brightness --save
 ```
 
 # Usage
@@ -17,12 +17,11 @@ It applies a brightness transformation to a base64 image. If you want a more com
 The default operation of this library is to consume imageData and return transformed imageData, but to facilitate a bit you can pass `asDataURL` as true to return a dataURL that you can inject into a image tag.
 
 ```js
-var imageBrightness = require('image-brightness');
+var imageBrightness = require('image-filter-brightness');
 
-var result = imageBrightness({
+imageBrightness({
     data: IMAGE_DATA,
-    adjustment: 30,
-    asDataURL: true //if you want data to data transformation you don't need to include this
+    adjustment: 30
 });
 ```
 
@@ -48,14 +47,14 @@ element.setAttribute('src', options.url);
 ### How can I use the output of this?
 
 ```js
-var result = imageBrightness({
+imageBrightness({
     data: IMAGE_DATA,
     adjustment: 30
+}).then(function (result) {
+    var image = document.createElement('img');
+    image.setAttribute('src', result);
+
+    var target = document.getElementById('#dummy-target');
+    target.appendChild(image);
 });
-
-var image = document.createElement('img');
-image.setAttribute('src', result);
-
-var target = document.getElementById('#dummy-target');
-target.appendChild(image);
 ```
