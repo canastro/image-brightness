@@ -1,6 +1,6 @@
 {
   "name": "image-filter-brightness",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Small library to apply a brightness transformation to a image",
   "main": "src/index.js",
   "scripts": {
@@ -51,9 +51,7 @@
      "watchify": "^3.7.0"
    },
    "dependencies": {
-     "babel-plugin-transform-object-assign": "^6.5.0",
-     "babel-plugin-transform-object-rest-spread": "^6.6.5",
-     "image-filter-core": "0.0.1"
+     "image-filter-core": "latest"
    },
    "browserify": {
      "transform": [
