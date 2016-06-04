@@ -25,16 +25,14 @@ window.onload = function () {
 
         imageBrightness({
             data: data,
-            adjustment: 30,
-            asDataURL: true
+            adjustment: 30
         }).then((results) => {
             applyResults('#target-1', results);
         });
 
         imageBrightness({
             data: data,
-            adjustment: 70,
-            asDataURL: true
+            adjustment: 70
         }).then((results) => {
             applyResults('#target-2', results);
         });
