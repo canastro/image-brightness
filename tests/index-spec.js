@@ -1,26 +1,25 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
-import * as utils from 'image-filter-core';
-import imageBrightness from '../src/index';
-import 'babel-polyfill';
+const sinon = require('sinon');
+const expect = require('chai').expect;
+const imageFilterCore = require('image-filter-core');
+const imageFilterBrightness = require('../src/index');
 
-describe('index', () => {
+describe('index', function() {
     var sandbox;
     var canvas;
-    var context;
+    var ctx;
 
-    beforeEach(() => {
+    beforeEach(function() {
         // Create a sandbox for the test
         sandbox = sinon.sandbox.create();
     });
 
-    afterEach(() => {
+    afterEach(function() {
         // Restore all the things made through the sandbox
         sandbox.restore();
     });
 
-    beforeEach(() => {
-        context = {
+    beforeEach(function() {
+        ctx = {
             getImageData: sandbox.stub(),
             putImageData: sandbox.stub()
         };
@@ -28,34 +27,56 @@ describe('index', () => {
         canvas = {
             width: 100,
             height: 150,
-            getContext: sandbox.stub().returns(context)
+            getContext: sandbox.stub().returns(ctx)
         };
 
-        sandbox.stub(utils, 'getCanvas').returns(canvas);
+        sandbox.stub(imageFilterCore, 'getCanvas').returns(canvas);
     });
 
-    it('should throw error by missing parameters', () => {
-        const fn = () => {
-            imageBrightness({});
-        };
+    context('when no data is provided', function () {
+        it('should throw error by missing parameters', function () {
+            function fn() {
+                imageFilterBrightness();
+            };
 
-        expect(fn).to.throw(/image-filter-brightness:: invalid options provided/);
+            expect(fn).to.throw(/image-filter-brightness:: invalid options provided/);
+        });
     });
 
-    it.skip('should apply transformation and return as imageData', () => {
-        var imageData = {
-            data: [193, 219, 242, 255]
-        };
 
-        // const expectedData = {
-        //     data: [224.34440379022422, 262.88216530631394, 296.9732620320856, 255]
-        // };
+    context('when no options are provided', function () {
+        it('should throw error by missing parameters', function () {
+            function fn() {
+                imageFilterBrightness({});
+            };
 
-        imageBrightness({
-            data: imageData,
-            brightness: 50
-        }).then((result) => {
-            console.log(result);
+            expect(fn).to.throw(/image-filter-brightness:: invalid options provided/);
+        });
+    });
+
+    context('when no brightness is provided', function () {
+        it('should throw error by missing parameters', function () {
+            function fn() {
+                imageFilterBrightness({}, {});
+            };
+
+            expect(fn).to.throw(/image-filter-brightness:: invalid options provided/);
+        });
+    });
+
+    context('when all required parameters are provided', function () {
+        it('should apply transformation and return as imageData', function (done) {
+            var imageData = {
+                data: [193, 219, 242, 255]
+            };
+
+            sandbox.stub(imageFilterCore, 'apply', function () { return Promise.resolve(); });
+
+            imageFilterBrightness(imageData, { adjustment: 10 }, 4)
+                .then(function (result) {
+                    expect(imageFilterCore.apply.calledOnce).to.equal(true);
+                    done();
+                });
         });
     });
 });
