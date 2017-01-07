@@ -1,41 +1,18 @@
-import worker from './worker';
-import { apply, getCanvas } from 'image-filter-core';
+var imageFilterCore = require('image-filter-core');
+var transform = require('./transform');
 
 /**
- * @name contrastImage
- * @param {object} options
- * @param {string} options.data - data of a image extracted from a canvas
- * @param {string} options.contrast - contrast value to apply
- * @param {string} options.nWorkers - number of workers
- * @param {bool} options.asDataURL
- * @returns {promise}
+ * @name brightness
+ * @param {ImageData} data - data of a image extracted from a canvas
+ * @param {Object} options - options to pass to the transformation function
+ * @param {Number} [options.adjustment] - adjustment to apply in the transformation
+ * @param {Number} nWorkers - number of workers
+ * @returns {Promise}
  */
-export default function contrastImage(options) {
-    if (!options.data || !options.adjustment) {
+module.exports =  function brightness(data, options, nWorkers) {
+    if (!data || !options || !options.adjustment) {
         throw new Error('image-filter-brightness:: invalid options provided');
     }
 
-    const nWorkers = options.nWorkers || 4;
-    const params = {
-        adjustment: options.adjustment
-    };
-    const canvas = getCanvas(options.data.width, options.data.height);
-    const context = canvas.getContext('2d');
-
-    // Drawing the source image into the target canvas
-    context.putImageData(options.data, 0, 0);
-
-    const len = canvas.width * canvas.height * 4;
-    const segmentLength = len / nWorkers; // This is the length of array sent to the worker
-    const blockSize = canvas.height / nWorkers; // Height of the picture chunck for every worker
-
-    return apply(
-        worker,
-        nWorkers,
-        canvas,
-        context,
-        params,
-        blockSize,
-        segmentLength
-    );
-}
+    return imageFilterCore.apply(data, transform, options, nWorkers);
+};

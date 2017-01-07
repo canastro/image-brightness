@@ -1,8 +1,8 @@
-import { expect } from 'chai';
-import { transform } from '../src/brightness';
+const expect = require('chai').expect;
+const transform = require('../src/transform');
 
-describe('brightness', () => {
-    it('should apply transformation and return as imageData', () => {
+describe('transform', function () {
+    it('should apply transformation and return as imageData', function () {
         const data = [
             193,
             219,
@@ -25,7 +25,7 @@ describe('brightness', () => {
             255
         ];
 
-        transform(data, 4, 5);
+        transform(data, 4, { adjustment: 5 });
         expect(data).to.deep.equal(expectedData);
     });
 });
