@@ -4,6 +4,7 @@
  * @param {Object} data
  * @param {Number} length
  * @param {Object} options
+ * @param {Number} [options.adjustment]
  */
 module.exports = function transform(data, length, options) {
     for (var i = 0; i < length; i += 4) {

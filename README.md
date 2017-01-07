@@ -31,8 +31,9 @@ This library consumes ImageData and outputs ImageData in a Promise. You can use 
 JS file:
 ```js
 var imageBrightness = require('image-brightness');
+var nWorkers = 4;
 
-imageBrightness(IMAGE_DATA, { adjustment: 30 });
+imageBrightness(IMAGE_DATA, { adjustment: 30 }, nWorkers);
 ```
 
 ## Frequent questions:
@@ -58,7 +59,9 @@ element.setAttribute('src', options.url);
 
 ```js
 var imageFilterCore = require('image-filter-core');
-imageBrightness(IMAGE_DATA, { adjustment: 30 })
+var nWorkers = 4;
+
+imageBrightness(IMAGE_DATA, { adjustment: 30 }, nWorkers)
     .then(function (result) {
         // result === ImageData object
         var image = document.createElement('img');
