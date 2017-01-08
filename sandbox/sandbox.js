@@ -19,12 +19,12 @@ window.onload = function () {
 
         var data = context.getImageData(0, 0, img.width, img.height);
 
-        imageBrightness(data, { adjustment: 30 })
+        imageBrightness(data, { adjustment: 30 }, 4)
             .then(function (results) {
                 applyResults('#target-1', canvas, context, results);
             });
 
-        imageBrightness(data, { adjustment: 70 })
+        imageBrightness(data, { adjustment: 70 }, 4)
             .then(function (results) {
                 applyResults('#target-2', canvas, context, results);
             });
